@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Páginas</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #020617, #0f172a);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .preview {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #020617;
+      overflow: hidden;
+    }
+
+    .preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+      transform: scale(0.7);
+      transform-origin: top left;
+      width: 142%;
+      height: 142%;
+    }
+
+    .content {
+      padding: 1rem 1.2rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .content h2 {
+      font-size: 1.1rem;
+    }
+
+    .content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .content a {
+      align-self: flex-start;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Minhas Páginas</h1>
+    <p>
+      Projetos e páginas HTML publicadas no GitHub Pages.
+      Clique em qualquer card para abrir a versão completa.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- Gestor de Tráfego -->
+    <div class="card">
+      <div class="preview">
+        <iframe src="gestordetrafego.html"></iframe>
+      </div>
+      <div class="content">
+        <h2>Gestor de Tráfego</h2>
+        <p>Página institucional focada em serviços de tráfego pago e conversão.</p>
+        <a href="gestordetrafego.html">Abrir página →</a>
+      </div>
+    </div>
+
+    <!-- Krono Web -->
+    <div class="card">
+      <div class="preview">
+        <iframe src="kronoweb.html"></iframe>
+      </div>
+      <div class="content">
+        <h2>Krono Web</h2>
+        <p>Site para apresentação de serviços digitais e soluções web.</p>
+        <a href="kronoweb.html">Abrir página →</a>
+      </div>
+    </div>
+
+    <!-- MTEC -->
+    <div class="card">
+      <div class="preview">
+        <iframe src="mtec.html"></iframe>
+      </div>
+      <div class="content">
+        <h2>MTEC</h2>
+        <p>Página institucional voltada a tecnologia e serviços técnicos.</p>
+        <a href="mtec.html">Abrir página →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2025 — GitHub Pages
+  </footer>
+
+</body>
+</html>
