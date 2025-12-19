@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Nome | Gestor de Tráfego Estratégico</title>
+    <meta name="description" content="Atraia clientes qualificados todos os dias com campanhas de tráfego pago otimizadas. Fale com um especialista e veja seu negócio crescer.">
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- CSS EMBUTIDO -->
+    <style>
+        /*=============== GOOGLE FONTS ===============*/
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        /*=============== CSS VARIABLES ===============*/
+        :root {
+          /* Colors */
+          --primary-color: #007BFF; /* Azul vibrante para CTAs */
+          --primary-color-dark: #0056b3;
+          --secondary-color: #F8F9FA; /* Fundo claro */
+          --text-color: #343A40; /* Texto principal escuro */
+          --text-color-light: #6C757D; /* Texto secundário */
+          --title-color: #212529; /* Títulos */
+          --white-color: #FFFFFF;
+          --dark-color: #1a1a1a;
+          --border-color: #DEE2E6;
+
+          /* Typography */
+          --body-font: 'Poppins', sans-serif;
+          --h1-font-size: 2.75rem;
+          --h2-font-size: 2rem;
+          --h3-font-size: 1.25rem;
+          --normal-font-size: 1rem;
+          --small-font-size: 0.875rem;
+
+          /* Font weight */
+          --font-medium: 500;
+          --font-semibold: 600;
+          --font-bold: 700;
+
+          /* Spacing */
+          --spacing-1: 0.5rem;
+          --spacing-2: 1rem;
+          --spacing-3: 1.5rem;
+          --spacing-4: 2rem;
+          --spacing-5: 3rem;
+          --spacing-6: 5rem;
+          
+          /* Box Shadow */
+          --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /*=============== BASE ===============*/
+        * {
+          box-sizing: border-box;
+          padding: 0;
+          margin: 0;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          font-family: var(--body-font);
+          font-size: var(--normal-font-size);
+          background-color: var(--white-color);
+          color: var(--text-color);
+          line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+          color: var(--title-color);
+          font-weight: var(--font-semibold);
+          line-height: 1.2;
+        }
+
+        ul {
+          list-style: none;
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--primary-color);
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        /*=============== REUSABLE CSS CLASSES ===============*/
+        .container {
+          max-width: 1140px;
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+
+        .section {
+          padding: var(--spacing-6) 0 var(--spacing-4);
+        }
+
+        .section-title {
+          font-size: var(--h2-font-size);
+          margin-bottom: var(--spacing-2);
+          font-weight: var(--font-bold);
+        }
+
+        .section-subtitle {
+            font-size: var(--normal-font-size);
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-4);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-pre-title {
+            font-size: var(--small-font-size);
+            color: var(--primary-color);
+            font-weight: var(--font-semibold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+          display: inline-block;
+          background-color: var(--primary-color);
+          color: var(--white-color);
+          padding: 12px 24px;
+          border-radius: 8px;
+          font-weight: var(--font-medium);
+          transition: all 0.3s ease;
+          border: 2px solid transparent;
+        }
+
+        .btn:hover {
+          background-color: var(--primary-color-dark);
+          transform: translateY(-3px);
+          box-shadow: var(--box-shadow-hover);
+        }
+
+        .btn-lg {
+          padding: 16px 32px;
+          font-size: 1.1rem;
+        }
+
+        .btn-sm {
+          padding: 8px 16px;
+          font-size: var(--small-font-size);
+        }
+
+        /* Animation on scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*=============== HEADER & NAV ===============*/
+        .header {
+          width: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 100;
+          background-color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          transition: box-shadow 0.3s ease;
+        }
+
+        .header.scrolled {
+            box-shadow: var(--box-shadow);
+        }
+
+        .nav {
+          height: 5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          font-size: 1.5rem;
+          font-weight: var(--font-bold);
+          color: var(--title-color);
+        }
+
+        .nav-list {
+          display: flex;
+          gap: var(--spacing-4);
+        }
+
+        .nav-link {
+          color: var(--text-color);
+          font-weight: var(--font-medium);
+          position: relative;
+          padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active-link::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .nav-toggle {
+          font-size: 1.5rem;
+          cursor: pointer;
+          display: none;
+        }
+
+        /*=============== HERO SECTION ===============*/
+        #hero {
+            padding-top: 8rem; /* Header height + space */
+            padding-bottom: var(--spacing-6);
+            background-color: var(--secondary-color);
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: var(--spacing-5);
+        }
+
+        .hero-title {
+            font-size: var(--h1-font-size);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-3);
+            max-width: 500px;
+        }
+
+        .hero-content .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-1);
+        }
+
+        .hero-image-container {
+            text-align: center;
+        }
+
+        .hero-image {
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 450px;
+            object-fit: cover;
+        }
+
+
+        /*=============== CLIENTS SECTION ===============*/
+        #clients {
+            padding: var(--spacing-4) 0;
+        }
+
+        .client-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-3);
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .client-logos:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .client-logos img {
+            max-height: 40px;
+            width: auto;
+        }
+
+        /*=============== SERVICES SECTION ===============*/
+        #services {
+            padding: var(--spacing-6) 0;
+            background-color: var(--secondary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-3);
+        }
+
+        .service-card {
+            background-color: var(--white-color);
+            padding: var(--spacing-4);
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .service-title {
+            font-size: var(--h3-font-size);
+            margin-bottom: var(--spacing-1);
+        }
+
+        /*=============== PROCESS SECTION ===============*/
+        #process {
+            padding: var(--spacing-6) 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-3);
+            margin-top: var(--spacing-5);
+            position: relative;
+        }
+
+        .process-step {
+            position: relative;
+            padding: var(--spacing-3);
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: var(--font-bold);
+            margin: 0 auto var(--spacing-2);
+            border: 4px solid var(--secondary-color);
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-1);
+        }
+
+        /*=============== TESTIMONIALS SECTION ===============*/
+        #testimonials {
+            padding: var(--spacing-6) 0;
+            background-color: var(--secondary-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--spacing-3);
+        }
+
+        .testimonial-card {
+            background-color: var(--white-color);
+            padding: var(--spacing-3);
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-color-light);
+            margin-bottom: var(--spacing-2);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .testimonial-text::before {
+            content: '“';
+            position: absolute;
+            left: -5px;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-weight: var(--font-semibold);
+            margin: 0;
+        }
+
+        .author-role {
+            font-size: var(--small-font-size);
+            color: var(--text-color-light);
+        }
+
+        /*=============== ABOUT SECTION ===============*/
+        #about {
+            padding: var(--spacing-6) 0;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            align-items: center;
+            gap: var(--spacing-5);
+        }
+
+        .about-image {
+            border-radius: 12px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .about-content p {
+            margin-bottom: var(--spacing-2);
+        }
+
+        .about-stats {
+            display: flex;
+            gap: var(--spacing-4);
+            margin-top: var(--spacing-3);
+        }
+
+        .about-stats li {
+            text-align: center;
+        }
+
+        .about-stats strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /*=============== FAQ SECTION ===============*/
+        #faq {
+            padding: var(--spacing-6) 0;
+            background-color: var(--secondary-color);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+
+        .faq-item {
+            background-color: var(--white-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-2);
+            cursor: pointer;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: var(--font-medium);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 var(--spacing-2) var(--spacing-2);
+            color: var(--text-color-light);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust as needed */
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /*=============== CTA SECTION ===============*/
+        .cta {
+            padding: var(--spacing-6) 0;
+            background-color: var(--dark-color);
+            color: var(--white-color);
+        }
+
+        .cta .section-title, .cta .section-subtitle {
+            color: var(--white-color);
+        }
+
+        .cta .section-subtitle {
+            opacity: 0.8;
+        }
+
+        /*=============== FOOTER ===============*/
+        .footer {
+            padding: var(--spacing-4) 0 var(--spacing-2);
+            background-color: var(--dark-color);
+            color: var(--white-color);
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            color: var(--white-color);
+        }
+
+        .footer-content p {
+            opacity: 0.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-3);
+        }
+
+        .footer-social a {
+            color: var(--white-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-copy {
+            font-size: var(--small-font-size);
+            opacity: 0.6;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--spacing-2);
+        }
+
+        /*=============== RESPONSIVE DESIGN ===============*/
+        @media screen and (max-width: 992px) {
+            .container {
+                max-width: 720px;
+            }
+            .hero-container, .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content {
+                order: 2;
+            }
+            .hero-image-container {
+                order: 1;
+                margin-bottom: var(--spacing-3);
+            }
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .about-image-container {
+                margin-bottom: var(--spacing-3);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            :root {
+                --h1-font-size: 2.25rem;
+                --h2-font-size: 1.75rem;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100%;
+                background-color: var(--white-color);
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                padding: var(--spacing-6) var(--spacing-3);
+                transition: right 0.4s ease;
+            }
+            .nav-menu.show-menu {
+                right: 0;
+            }
+            .nav-list {
+                flex-direction: column;
+                gap: var(--spacing-3);
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-container {
+                flex-direction: column;
+                gap: var(--spacing-3);
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .process-steps, .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <!-- Personalize aqui -->
+                <a href="#" class="logo">Seu Nome.</a>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#services" class="nav-link">Serviços</a></li>
+                        <li><a href="#process" class="nav-link">Como Funciona</a></li>
+                        <li><a href="#testimonials" class="nav-link">Depoimentos</a></li>
+                        <li><a href="#about" class="nav-link">Sobre</a></li>
+                        <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions">
+                    <a href="#contact" class="btn btn-primary btn-sm">Fale Comigo</a>
+                    <div class="nav-toggle" id="nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==================== HERO ==================== -->
+        <section id="hero" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <p class="section-pre-title animate-on-scroll">🚀 ALAVANQUE SUAS VENDAS</p>
+                    <h1 class="hero-title animate-on-scroll">Atraia Clientes Qualificados Todos os Dias</h1>
+                    <p class="hero-subtitle animate-on-scroll">Chega de se preocupar com a falta de clientes. Eu crio e gerencio campanhas de tráfego pago que trazem resultados reais e previsíveis para o seu negócio.</p>
+                    <!-- Personalize aqui com seu WhatsApp -->
+                    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20uma%20análise%20gratuita." target="_blank" class="btn btn-primary btn-lg animate-on-scroll">
+                        <i class="fab fa-whatsapp"></i> Quero uma Análise Gratuita
+                    </a>
+                </div>
+                <div class="hero-image-container animate-on-scroll">
+                    <!-- Imagem online do Unsplash -->
+                    <img src="https://images.unsplash.com/photo-1556742212-5b321f3c261b?q=80&w=2070&auto=format&fit=crop" alt="Gestor de Tráfego analisando resultados" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CLIENTS (PROVA SOCIAL) ==================== -->
+        <section id="clients" class="clients">
+            <div class="container">
+                <p class="section-pre-title text-center animate-on-scroll">Empresas que confiam no meu trabalho para gerar resultados</p>
+                <div class="client-logos animate-on-scroll">
+                    <!-- Imagens online de placeholder -->
+                    <img src="https://placehold.co/150x50/FFFFFF/333333?text=Cliente+1" alt="Logo Cliente 1">
+                    <img src="https://placehold.co/150x50/FFFFFF/333333?text=Cliente+2" alt="Logo Cliente 2">
+                    <img src="https://placehold.co/150x50/FFFFFF/333333?text=Cliente+3" alt="Logo Cliente 3">
+                    <img src="https://placehold.co/150x50/FFFFFF/333333?text=Cliente+4" alt="Logo Cliente 4">
+                    <img src="https://placehold.co/150x50/FFFFFF/333333?text=Cliente+5" alt="Logo Cliente 5">
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SERVICES ==================== -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">Serviços Completos para o Sucesso do seu Negócio</h2>
+                <p class="section-subtitle text-center animate-on-scroll">Soluções de tráfego pago para cada etapa do seu funil de vendas.</p>
+                <div class="services-grid">
+                    <!-- Serviço 1 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon"><i class="fab fa-google"></i></div>
+                        <h3 class="service-title">Google & YouTube Ads</h3>
+                        <p class="service-description">Alcance clientes no exato momento em que eles procuram por seus produtos ou serviços na maior rede de pesquisa do mundo.</p>
+                    </div>
+                    <!-- Serviço 2 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon"><i class="fab fa-meta"></i></div>
+                        <h3 class="service-title">Meta Ads</h3>
+                        <p class="service-description">Crie campanhas segmentadas no Facebook e Instagram para construir sua marca e gerar leads qualificados onde seu público passa mais tempo.</p>
+                    </div>
+                    <!-- Serviço 3 -->
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="service-title">Otimização e Análise</h3>
+                        <p class="service-description">Análise constante de métricas e otimização de campanhas para garantir o melhor Retorno Sobre o Investimento (ROI) possível.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROCESS ==================== -->
+        <section id="process" class="process">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">Meu Processo de Trabalho Transparente</h2>
+                <p class="section-subtitle text-center animate-on-scroll">Um método claro e eficiente para garantir que estamos sempre na direção certa.</p>
+                <div class="process-steps">
+                    <!-- Passo 1 -->
+                    <div class="process-step animate-on-scroll">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Diagnóstico e Planejamento</h3>
+                        <p class="step-description">Entendo seu negócio, público e metas para criar uma estratégia de tráfego personalizada e alinhada aos seus objetivos.</p>
+                    </div>
+                    <!-- Passo 2 -->
+                    <div class="process-step animate-on-scroll">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Criação e Execução</h3>
+                        <p class="step-description">Configuro e lanço as campanhas nas plataformas escolhidas, utilizando as melhores práticas de copywriting e segmentação.</p>
+                    </div>
+                    <!-- Passo 3 -->
+                    <div class="process-step animate-on-scroll">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Otimização Contínua</h3>
+                        <p class="step-description">Monitoro os resultados diariamente, faço ajustes e otimizações para escalar o que funciona e maximizar seu orçamento.</p>
+                    </div>
+                     <!-- Passo 4 -->
+                    <div class="process-step animate-on-scroll">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Relatórios Claros</h3>
+                        <p class="step-description">Você recebe relatórios periódicos e fáceis de entender, mostrando o desempenho das campanhas e os próximos passos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TESTIMONIALS ==================== -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">O que meus clientes dizem</h2>
+                <div class="testimonials-grid">
+                    <!-- Depoimento 1 -->
+                    <div class="testimonial-card animate-on-scroll">
+                        <p class="testimonial-text">"O trabalho foi um divisor de águas para nossa empresa. As vendas aumentaram 40% em 3 meses. Profissionalismo e resultados definem!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto do Cliente">
+                            <div>
+                                <h4 class="author-name">João da Silva</h4>
+                                <p class="author-role">CEO, Loja Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Depoimento 2 -->
+                    <div class="testimonial-card animate-on-scroll">
+                        <p class="testimonial-text">"Finalmente encontramos alguém que entende do nosso negócio e entrega o que promete. O fluxo de leads qualificados é constante agora."</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto da Cliente">
+                            <div>
+                                <h4 class="author-name">Maria Oliveira</h4>
+                                <p class="author-role">Diretora, Clínica Saúde+</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT ==================== -->
+        <section id="about" class="about">
+            <div class="container about-container">
+                <div class="about-image-container animate-on-scroll">
+                    <!-- Imagem online do Unsplash -->
+                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2071&auto=format&fit=crop" alt="Foto do Gestor de Tráfego" class="about-image">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title animate-on-scroll">Um Especialista em Tráfego Focado em Performance</h2>
+                    <p class="animate-on-scroll">Olá, eu sou [Seu Nome]. Com mais de [X] anos de experiência e [Y] em investimentos gerenciados, minha paixão é ajudar negócios como o seu a alcançarem seu verdadeiro potencial online.</p>
+                    <p class="animate-on-scroll">Acredito que tráfego pago não é sobre gastar dinheiro, mas sobre investir de forma inteligente para gerar lucro. Minha abordagem é 100% focada em dados e no seu sucesso.</p>
+                    <ul class="about-stats animate-on-scroll">
+                        <li><strong>+R$ 1M</strong> Investidos</li>
+                        <li><strong>+50</strong> Clientes Satisfeitos</li>
+                        <li><strong>+5 Anos</strong> de Mercado</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ ==================== -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title text-center animate-on-scroll">Perguntas Frequentes</h2>
+                <div class="faq-container">
+                    <!-- Pergunta 1 -->
+                    <div class="faq-item animate-on-scroll">
+                        <div class="faq-question">
+                            <h3>Quanto preciso investir para começar?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O investimento ideal depende do seu setor, metas e concorrência. Na nossa conversa inicial, faremos uma análise para definir um orçamento que traga resultados sem comprometer seu caixa.</p>
+                        </div>
+                    </div>
+                    <!-- Pergunta 2 -->
+                    <div class="faq-item animate-on-scroll">
+                        <div class="faq-question">
+                            <h3>Em quanto tempo vejo os resultados?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Embora alguns resultados possam aparecer nos primeiros dias, o tráfego pago é um trabalho de médio a longo prazo. Geralmente, os resultados mais consistentes e otimizados começam a surgir a partir do segundo ou terceiro mês.</p>
+                        </div>
+                    </div>
+                    <!-- Pergunta 3 -->
+                    <div class="faq-item animate-on-scroll">
+                        <div class="faq-question">
+                            <h3>Vocês também criam os anúncios (criativos)?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Meu foco é na estratégia, criação e gestão das campanhas. A criação de artes e vídeos pode ser feita pelo seu time interno ou posso indicar parceiros de confiança para essa tarefa.</p>
+                        </div>
+                    </div>
+                    <!-- Pergunta 4 -->
+                    <div class="faq-item animate-on-scroll">
+                        <div class="faq-question">
+                            <h3>Qual a garantia de que terei resultados?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Em marketing, é impossível garantir resultados específicos, pois eles dependem de muitos fatores (mercado, oferta, preço, etc.). O que eu garanto é um trabalho profissional, com método, transparência e foco total em alcançar as metas que definirmos juntos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FINAL CTA ==================== -->
+        <section id="contact" class="cta">
+            <div class="container text-center">
+                <h2 class="section-title animate-on-scroll">Pronto para Vender Mais?</h2>
+                <p class="section-subtitle animate-on-scroll">Vamos conversar sobre como o tráfego pago pode transformar seus resultados. Agende uma chamada sem compromisso.</p>
+                <!-- Personalize aqui com seu WhatsApp -->
+                <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20uma%20reunião." target="_blank" class="btn btn-primary btn-lg animate-on-scroll">
+                    <i class="fab fa-whatsapp"></i> Agendar Reunião Gratuita
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-content">
+                <h3 class="footer-title">Seu Nome</h3>
+                <p>Transformando cliques em clientes.</p>
+            </div>
+            <div class="footer-social">
+                <!-- Personalize com seus links -->
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <p class="footer-copy">&#169; 2024 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- JAVASCRIPT EMBUTIDO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            /*=============== SHOW/HIDE MOBILE MENU ===============*/
+            const navMenu = document.getElementById('nav-menu');
+            const navToggle = document.getElementById('nav-toggle');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Show menu
+            if (navToggle) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('show-menu');
+                });
+            }
+
+            // Hide menu when a link is clicked
+            function linkAction() {
+                navMenu.classList.remove('show-menu');
+            }
+            navLinks.forEach(n => n.addEventListener('click', linkAction));
+
+            /*=============== HEADER SHADOW ON SCROLL ===============*/
+            function scrollHeader() {
+                const header = document.querySelector('.header');
+                // When the scroll is greater than 50 viewport height, add the scroll-header class
+                if (this.scrollY >= 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', scrollHeader);
+
+            /*=============== FAQ ACCORDION ===============*/
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach((item) => {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', () => {
+                    const openItem = document.querySelector('.faq-item.active');
+
+                    // Close the previously opened item if it's not the current one
+                    if (openItem && openItem !== item) {
+                        openItem.classList.remove('active');
+                    }
+
+                    // Toggle the active class on the current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            /*=============== SCROLL REVEAL ANIMATION ===============*/
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach((el) => observer.observe(el));
+
+
+            /*=============== ACTIVE LINK ON SCROLL ===============*/
+            const sections = document.querySelectorAll('section[id]');
+
+            function scrollActive() {
+                const scrollY = window.pageYOffset;
+
+                sections.forEach(current => {
+                    const sectionHeight = current.offsetHeight;
+                    const sectionTop = current.offsetTop - 150; // Adjusted offset
+                    const sectionId = current.getAttribute('id');
+                    const link = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
+
+                    if (link) {
+                         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                            link.classList.add('active-link');
+                        } else {
+                            link.classList.remove('active-link');
+                        }
+                    }
+                });
+            }
+            window.addEventListener('scroll', scrollActive);
+
+        });
+    </script>
+</body>
+</html>
