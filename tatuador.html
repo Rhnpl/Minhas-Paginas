@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink Master | Tattoo Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIÁVEIS E RESET --- */
+        :root {
+            --primary-red: #D90429;     /* Vermelho Intenso */
+            --primary-red-dark: #8d0018; 
+            --accent-yellow: #FFC300;   /* Amarelo Ouro/Old School */
+            --bg-black: #050505;        /* Preto Quase Absoluto */
+            --bg-panel: #121212;        /* Cinza muito escuro */
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Roboto', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITÁRIOS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-red);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header p {
+            color: var(--accent-yellow);
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-family: var(--font-title);
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-red);
+            color: white;
+            clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-yellow);
+            color: var(--bg-black);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(5, 5, 5, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-yellow);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            cursor: pointer;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=1374&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        /* Efeito de granulação/ruído para estética tattoo */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 15px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        /* --- ESTILOS/SERVICES --- */
+        .styles-section {
+            padding: 80px 0;
+            background-color: var(--bg-black);
+        }
+
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .style-card {
+            background: var(--bg-panel);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #222;
+            transition: var(--transition);
+        }
+
+        .style-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .style-icon {
+            font-size: 2.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+        }
+
+        .style-card h3 {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .style-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* --- GALERIA/PORTFOLIO --- */
+        .gallery {
+            padding: 80px 0;
+            background-color: #080808;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 350px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(80%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: rgba(217, 4, 41, 0.9); /* Vermelho translúcido */
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1rem;
+            color: white;
+        }
+
+        /* --- ARTISTA --- */
+        .artist {
+            padding: 100px 0;
+            background: linear-gradient(to right, var(--bg-black) 0%, #151515 100%);
+        }
+
+        .artist-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .artist-img {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .artist-img img {
+            width: 100%;
+            border: 2px solid var(--accent-yellow);
+            box-shadow: 10px 10px 0 var(--primary-red);
+        }
+
+        .artist-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .artist-info h2 {
+            text-align: left;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--accent-yellow);
+            font-family: var(--font-title);
+        }
+
+        .stat-item span {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- FAQ --- */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--bg-black);
+        }
+
+        .faq-item {
+            background-color: var(--bg-panel);
+            margin-bottom: 10px;
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-left: 3px solid var(--accent-yellow);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            background-color: #0f0f0f;
+            color: var(--text-gray);
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 20px;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-red);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #000;
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-red);
+        }
+
+        .footer-info {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- WHATSAPP FLOAT --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: black;
+                text-align: center;
+                padding: 20px;
+                border-bottom: 2px solid var(--primary-red);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .artist-container {
+                flex-direction: column;
+            }
+
+            .artist-img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">INK<span>MASTER</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#artist">Artista</a></li>
+                    <li><a href="#faq">Dúvidas</a></li>
+                    <li><a href="https://wa.me/" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.8rem;">Orçamento</a></li>
+                </ul>
+                <div class="mobile-menu" onclick="toggleMenu()">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content reveal">
+            <h1>Arte na pele<br><span>Eternizada</span></h1>
+            <p>Estúdio especializado em Realismo, Blackwork e Old School. Biossegurança total e arte exclusiva.</p>
+            <br><br>
+            <a href="https://wa.me/" class="btn btn-primary">Agendar Sessão</a>
+        </div>
+    </section>
+
+    <section class="styles-section">
+        <div class="container">
+            <div class="style-grid reveal">
+                <div class="style-card">
+                    <div class="style-icon">⚔️</div>
+                    <h3>Old School</h3>
+                    <p>Traços grossos, cores sólidas e iconografia clássica.</p>
+                </div>
+                <div class="style-card">
+                    <div class="style-icon">💀</div>
+                    <h3>Blackwork</h3>
+                    <p>Contraste alto, tinta preta sólida e geometria sagrada.</p>
+                </div>
+                <div class="style-card">
+                    <div class="style-icon">👁️</div>
+                    <h3>Realismo</h3>
+                    <p>Sombreamento suave e detalhes fotográficos impressionantes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="gallery">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Galeria</h2>
+                <p>Últimos Trabalhos</p>
+            </div>
+
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590246296340-bb7f3db61a42?q=80&w=1470&auto=format&fit=crop" alt="Tattoo 1">
+                    <div class="gallery-overlay">
+                        <h3>Fechamento de Braço</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560707303-4e9803587261?q=80&w=1325&auto=format&fit=crop" alt="Tattoo 2">
+                    <div class="gallery-overlay">
+                        <h3>Blackwork Floral</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=1470&auto=format&fit=crop" alt="Tattoo 3">
+                    <div class="gallery-overlay">
+                        <h3>Retrato Realista</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=1374&auto=format&fit=crop" alt="Tattoo 4">
+                    <div class="gallery-overlay">
+                        <h3>Tradicional Colorido</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=1374&auto=format&fit=crop" alt="Tattoo 5">
+                    <div class="gallery-overlay">
+                        <h3>Fine Line</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1550537602-366d8b633693?q=80&w=1474&auto=format&fit=crop" alt="Tattoo 6">
+                    <div class="gallery-overlay">
+                        <h3>Cover-up</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" style="color: var(--primary-red); text-decoration: none; font-weight: bold; border-bottom: 1px solid var(--accent-yellow);">Ver Instagram Completo &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="artist" class="artist">
+        <div class="container artist-container reveal">
+            <div class="artist-img">
+                <img src="https://images.unsplash.com/photo-1597223506889-493264f8c630?q=80&w=1470&auto=format&fit=crop" alt="O Tatuador">
+            </div>
+            <div class="artist-info">
+                <h2>O Artista</h2>
+                <p style="color: var(--accent-yellow); margin-bottom: 20px; font-weight: bold;">CRIATIVIDADE & PRECISÃO</p>
+                <p>Com mais de 8 anos de estrada, transformo ideias em arte permanente. Meu foco é entregar um trabalho exclusivo, respeitando a anatomia do corpo e garantindo a máxima segurança sanitária.</p>
+                <br>
+                <p>Utilizo apenas materiais descartáveis e tintas regulamentadas pela ANVISA. Seu corpo é um templo, e minha arte é a decoração.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <h4>8+</h4>
+                        <span>Anos Exp.</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>1k+</h4>
+                        <span>Tattoos</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>15</h4>
+                        <span>Prêmios</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container reveal">
+            <div class="section-header">
+                <h2>Dúvidas</h2>
+                <p>Perguntas Frequentes</p>
+            </div>
+            
+            <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">Como funciona o orçamento? <span>+</span></div>
+                    <div class="faq-answer">O orçamento é feito via WhatsApp ou presencialmente. Preciso saber o local do corpo, tamanho aproximado em cm e referências do estilo.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Dói muito fazer tatuagem? <span>+</span></div>
+                    <div class="faq-answer">A dor é relativa e varia de pessoa para pessoa e do local do corpo. Mas é suportável e usamos técnicas para minimizar o desconforto.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Quais os cuidados pós-tattoo? <span>+</span></div>
+                    <div class="faq-answer">Manter limpo, hidratar com a pomada recomendada, não coçar, evitar sol, piscina e mar durante o período de cicatrização (15 a 30 dias).</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Faz cobertura (Cover-up)? <span>+</span></div>
+                    <div class="faq-answer">Sim! Especialista em reformas e coberturas. É necessário uma avaliação prévia da tatuagem antiga.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px;">INK<span>MASTER</span></div>
+            <div class="social-icons">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Pinterest</a>
+            </div>
+            <div class="footer-info">
+                <p>Rua da Tinta, 666 - Centro, São Paulo</p>
+                <p>Seg - Sáb: 10h às 20h</p>
+            </div>
+            <p style="color: #444; font-size: 0.8rem;">&copy; 2024 Ink Master Studio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Menu Mobile
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Scroll Animation (Reveal)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const scrollReveal = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', scrollReveal);
+        // Trigger once on load
+        scrollReveal();
+    </script>
+</body>
+</html>

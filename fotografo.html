@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOCUS | Fotografia Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-black: #050505;
+            --accent: #FFB703;
+            --deep-blue: #003366;
+            --white: #ffffff;
+            --gray: #888888;
+            --glass: rgba(10, 10, 10, 0.8);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* --- LAYOUT --- */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 30px; }
+        .section-padding { padding: 120px 0; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(0px);
+        }
+
+        header.scrolled {
+            background: var(--glass);
+            padding: 18px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 35px; list-style: none; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover { opacity: 1; color: var(--accent); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: grayscale(40%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-content span {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--bg-black);
+            background: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 183, 3, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* --- GALLERY --- */
+        .section-title { margin-bottom: 80px; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 15px; }
+        .underline { width: 60px; height: 4px; background: var(--accent); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* Layout Assimétrico para um visual premium */
+        .gallery-item:nth-child(1) { grid-column: span 8; height: 500px; }
+        .gallery-item:nth-child(2) { grid-column: span 4; height: 500px; }
+        .gallery-item:nth-child(3) { grid-column: span 4; height: 600px; }
+        .gallery-item:nth-child(4) { grid-column: span 8; height: 600px; }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* --- SERVICES --- */
+        .services { background: #080808; }
+        .service-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .service-card {
+            padding: 60px 40px;
+            border: 1px solid #151515;
+            transition: var(--transition);
+        }
+        .service-card:hover { background: #111; border-color: var(--accent); transform: translateY(-10px); }
+        .service-card h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 20px; }
+        .service-card p { color: var(--gray); font-weight: 300; }
+
+        /* --- CONTACT --- */
+        .contact { background: var(--accent); color: var(--bg-black); }
+        .contact h2 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 30px; }
+        .btn-dark { background: var(--bg-black); color: var(--white); border: none; }
+        .btn-dark:hover { background: var(--white); color: var(--bg-black); }
+
+        /* --- FOOTER --- */
+        footer { padding: 80px 0; border-top: 1px solid #111; text-align: center; }
+        .social-links { margin-bottom: 30px; display: flex; justify-content: center; gap: 30px; }
+        .social-links a { color: var(--white); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: var(--transition); }
+        .social-links a:hover { color: var(--accent); }
+        .copyright { color: var(--gray); font-size: 0.7rem; letter-spacing: 1px; }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-item { grid-column: span 6 !important; height: 400px !important; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .gallery-item { grid-column: span 12 !important; }
+            .section-padding { padding: 80px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">FOCUS<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="#portfolio">Trabalhos</a></li>
+                    <li><a href="#servicos">O que faço</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <div class="menu-icon"></div> </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1493863641943-9b689da23bca?q=80&w=2058&auto=format&fit=crop" class="hero-video-bg" alt="Fundo">
+        <div class="container">
+            <div class="hero-content">
+                <span>Visual Storyteller</span>
+                <h1>Eternizando a<br>alma de cada frame.</h1>
+                <a href="#portfolio" class="btn">Ver Portfólio</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <div class="underline"></div>
+                <h2 style="margin-top: 20px;">Portfólio Selecionado</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1470&auto=format&fit=crop" alt="Wedding">
+                    <div class="gallery-overlay">
+                        <h3>Editoriais de Luxo</h3>
+                        <p>A união perfeita entre arte e momento.</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop" alt="Portrait">
+                    <div class="gallery-overlay">
+                        <h3>Retratos Profissionais</h3>
+                        <p>Capturando a verdade por trás do rosto.</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1574&auto=format&fit=crop" alt="Nature">
+                    <div class="gallery-overlay">
+                        <h3>Wild Nature</h3>
+                        <p>Onde o silêncio encontra a imagem.</p>
+                    </div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1470&auto=format&fit=crop" alt="City">
+                    <div class="gallery-overlay">
+                        <h3>Urban Vibes</h3>
+                        <p>Arquitetura e movimento cotidiano.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="services section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <div class="underline"></div>
+                <h2 style="margin-top: 20px;">Serviços</h2>
+            </div>
+
+            <div class="service-list">
+                <div class="service-card reveal">
+                    <h3>01. Branding Visual</h3>
+                    <p>Fotografias estratégicas para marcas que buscam um posicionamento premium e conexão com o público.</p>
+                </div>
+                <div class="service-card reveal">
+                    <h3>02. Fine Art</h3>
+                    <p>Impressões exclusivas de fotografias autorais para decoração de ambientes de alto padrão.</p>
+                </div>
+                <div class="service-card reveal">
+                    <h3>03. Destination</h3>
+                    <p>Coberturas internacionais para eventos e campanhas em qualquer lugar do mundo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact section-padding">
+        <div class="container" style="text-align: center;">
+            <div class="reveal">
+                <h2>Vamos criar algo<br>memorável juntos?</h2>
+                <a href="https://wa.me/" class="btn btn-dark">Enviar Mensagem</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">INSTAGRAM</a>
+                <a href="#">BEHANCE</a>
+                <a href="#">LINKEDIN</a>
+            </div>
+            <p class="copyright">&copy; 2025 FOCUS PHOTOGRAPHY. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Intersection Observer for Smooth Reveals
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarPower - Energia Limpa para um Futuro Sustentável</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variáveis de Cores e Estilos */
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #3B82F6;
+            --accent: #FFD700;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F8FAFC;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-dark); background-color: var(--white); }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* Tipografia */
+        h1, h2, h3 { color: var(--primary); font-weight: 700; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
+        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent); margin: 10px auto; border-radius: 2px; }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        .btn-amarelo { background: var(--accent); color: var(--primary); border-color: var(--accent); }
+        .btn-amarelo:hover { background: transparent; color: var(--accent); }
+        .btn-azul { background: var(--primary-light); color: var(--white); border-color: var(--primary-light); }
+        .btn-azul:hover { background: transparent; color: var(--primary-light); }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; font-size: 1.6rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .logo i { color: var(--accent); margin-right: 10px; font-size: 2rem; }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul a { text-decoration: none; color: var(--primary); font-weight: 600; transition: var(--transition); }
+        nav ul a:hover { color: var(--primary-light); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.85), rgba(30, 58, 138, 0.85)), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            padding: 200px 0 120px;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero h1 { color: var(--white); font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 2.5rem; opacity: 0.9; }
+        .cta-buttons { display: flex; justify-content: center; gap: 20px; }
+
+        /* Seções Gerais */
+        section { padding: 100px 0; }
+        .bg-gray { background-color: var(--bg-light); }
+
+        /* Cards Benefícios */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--white); padding: 40px; border-radius: 15px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+        .card:hover { transform: translateY(-10px); }
+        .card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* Como Funciona */
+        .passos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center; }
+        .passo-num { width: 60px; height: 60px; background: var(--primary-light); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 20px; }
+
+        /* Serviços */
+        .servico-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); }
+        .servico-icon-box { height: 200px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .servico-content { padding: 30px; }
+
+        /* Depoimentos */
+        .depoimento-card { background: var(--bg-light); padding: 30px; border-radius: 15px; border-left: 5px solid var(--accent); }
+        .cliente { display: flex; align-items: center; margin-top: 20px; }
+        .avatar { width: 50px; height: 50px; background: var(--primary-light); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px; }
+
+        /* Contato */
+        .contato-wrapper { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input, textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        textarea { height: 150px; }
+
+        .info-item { display: flex; align-items: center; margin-bottom: 30px; }
+        .info-item i { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; font-size: 1.2rem; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h3 { color: var(--white); margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--accent); }
+        .social { display: flex; gap: 15px; margin-top: 20px; }
+        .social a { color: white; font-size: 1.2rem; transition: var(--transition); }
+        .social a:hover { color: var(--accent); }
+        .copy { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; font-size: 0.9rem; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; padding: 20px; box-shadow: var(--shadow); }
+            nav.active { display: block; }
+            nav ul { flex-direction: column; text-align: center; }
+            .hero h1 { font-size: 2.5rem; }
+            .contato-wrapper { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo"><i class="fas fa-sun"></i> SolarPower</a>
+            <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Energia Solar para um<br>Futuro Sustentável</h1>
+            <p>Transforme sua conta de luz em economia real. Gere sua própria energia limpa com tecnologia de ponta e suporte especializado.</p>
+            <div class="cta-buttons">
+                <a href="#contato" class="btn btn-amarelo">Solicitar Orçamento</a>
+                <a href="#beneficios" class="btn btn-azul">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="bg-gray">
+        <div class="container">
+            <h2>Benefícios da Energia Solar</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Economia Financeira</h3>
+                    <p>Reduza sua conta de luz em até 95% e proteja-se contra a inflação energética.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Sustentabilidade</h3>
+                    <p>Utilize uma fonte 100% renovável e ajude a preservar o meio ambiente para as futuras gerações.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Valorização</h3>
+                    <p>Imóveis com sistemas solares são mais valorizados e possuem maior liquidez no mercado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona">
+        <div class="container">
+            <h2>Como Funciona</h2>
+            <div class="passos-grid">
+                <div class="passo">
+                    <div class="passo-num">1</div>
+                    <h3>Projeto</h3>
+                    <p>Análise técnica do seu telhado e consumo mensal.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">2</div>
+                    <h3>Instalação</h3>
+                    <p>Equipe própria e homologação junto à concessionária.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">3</div>
+                    <h3>Monitoramento</h3>
+                    <p>Acompanhe tudo pelo celular em tempo real.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">4</div>
+                    <h3>Economia</h3>
+                    <p>Pronto! Você começa a economizar no primeiro mês.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="bg-gray">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <div class="grid-3">
+                <div class="servico-card">
+                    <div class="servico-icon-box"><i class="fas fa-home"></i></div>
+                    <div class="servico-content">
+                        <h3>Residencial</h3>
+                        <p>Soluções sob medida para casas de todos os tamanhos, focando no conforto da sua família.</p>
+                    </div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon-box"><i class="fas fa-building"></i></div>
+                    <div class="servico-content">
+                        <h3>Comercial</h3>
+                        <p>Reduza custos fixos da sua empresa e aumente sua margem de lucro com energia própria.</p>
+                    </div>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon-box"><i class="fas fa-industry"></i></div>
+                    <div class="servico-content">
+                        <h3>Industrial</h3>
+                        <p>Projetos de alta performance para demandas pesadas e grandes parques industriais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos">
+        <div class="container">
+            <h2>O Que Dizem Nossos Clientes</h2>
+            <div class="grid-3">
+                <div class="depoimento-card">
+                    <p>"Minha conta caiu de R$ 450 para a taxa mínima. O investimento se paga sozinho!"</p>
+                    <div class="cliente">
+                        <div class="avatar">RC</div>
+                        <div><strong>Roberto Costa</strong><br><small>São Paulo - SP</small></div>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <p>"Instalação impecável e suporte pós-venda nota 10. Recomendo a todos."</p>
+                    <div class="cliente">
+                        <div class="avatar">AS</div>
+                        <div><strong>Ana Silva</strong><br><small>Rio de Janeiro - RJ</small></div>
+                    </div>
+                </div>
+                <div class="depoimento-card">
+                    <p>"A melhor decisão que tomei para minha empresa este ano. Economia real!"</p>
+                    <div class="cliente">
+                        <div class="avatar">MF</div>
+                        <div><strong>Marcos Ferreira</strong><br><small>Belo Horizonte - MG</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="bg-gray">
+        <div class="container">
+            <h2>Solicite um Orçamento</h2>
+            <div class="contato-wrapper">
+                <form id="form-contato">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea id="mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-amarelo">Enviar Mensagem</button>
+                </form>
+                <div class="info-contato">
+                    <h3>Canais de Atendimento</h3>
+                    <p>Fale diretamente com um consultor especialista.</p>
+                    <br>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div><h4>Endereço</h4><p>Av. das Energias Renováveis, 1234 - SP</p></div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div><h4>Telefone</h4><p>(11) 5555-1234</p></div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div><h4>E-mail</h4><p>contato@solarpower.com.br</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="color: white;"><i class="fas fa-sun"></i> SolarPower</a>
+                    <p>Líder em soluções fotovoltaicas para um Brasil mais sustentável.</p>
+                    <div class="social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Manutenção</a></li>
+                        <li><a href="#">Monitoramento</a></li>
+                        <li><a href="#">Consultoria</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Atendimento</h3>
+                    <p>Seg a Sex: 08h - 18h</p>
+                    <p>Sáb: 09h - 13h</p>
+                </div>
+            </div>
+            <div class="copy">
+                &copy; 2025 SolarPower - Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const btnMenu = document.getElementById('menu-toggle');
+        const menu = document.getElementById('nav-menu');
+        btnMenu.onclick = () => menu.classList.toggle('active');
+
+        // Fecha menu ao clicar em link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.onclick = () => menu.classList.remove('active');
+        });
+
+        // Simulação de Envio
+        document.getElementById('form-contato').onsubmit = (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            alert(`Obrigado, ${nome}! Entraremos em contato em breve.`);
+            e.target.reset();
+        };
+    </script>
+</body>
+</html>
